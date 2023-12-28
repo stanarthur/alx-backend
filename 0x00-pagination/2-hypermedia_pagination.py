@@ -60,3 +60,4 @@ class Server:
             'total_page': total_pages,
         }
         return page_info
+    
