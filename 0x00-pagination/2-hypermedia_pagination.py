@@ -34,29 +34,28 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        '''Retrives a page of data
-        '''
+        """Retrieves a page of data.
+        """
         assert type(page) == int and type(page_size) == int
-        assert (page > 0 and page_size > 0)
-        startIndex, endIndex = index_range(page, page_size)
-        paginatedData = self.dataset()
-        if startIndex > len(paginatedData):
+        assert page > 0 and page_size > 0
+        start, end = index_range(page, page_size)
+        data = self.dataset()
+        if start > len(data):
             return []
-        return paginatedData[startIndex:endIndex]
+        return data[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        '''retrives a hypermedia about a page
-        '''
-        assert type(page) == int and page > 0
-        assert type(page_size) == int and page_size > 0
+        """Retrieves information about a page.
+        """
         page_data = self.get_page(page, page_size)
-        total_pages = math.ceil(len(self.dataset()) / page_size)
+        start, end = index_range(page, page_size)
+        total_pages = math.ceil(len(self.__dataset) / page_size)
         page_info = {
-            'page_size': page,
+            'page_size': len(page_data),
             'page': page,
             'data': page_data,
-            'next_page': page + 1 if page + 1 < total_pages else None,
-            'prev_page': page - 1 if page > 1 else None,
-            'total_page': total_pages,
+            'next_page': page + 1 if end < len(self.__dataset) else None,
+            'prev_page': page - 1 if start > 0 else None,
+            'total_pages': total_pages,
         }
         return page_info
