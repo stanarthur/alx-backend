@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Basic Flask app-Get locale from request"""
+""" Basic Flask app- to get locale from request"""
 from flask import Flask, render_template
 
 
