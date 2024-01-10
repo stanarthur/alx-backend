@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
+
 class Config(object):
     """ Config class for Babel"""
     LANGUAGES = ["en", "fr"]
@@ -27,9 +28,9 @@ def get_locale() -> str:
 def get_index() -> str:
     """ GET /
     Return:
-        - template 2-index.html
+        - template 3-index.html
     """
-    return render_template('2-index.html')
+    return render_template('3-index.html')
 
 
 if __name__ == "__main__":
