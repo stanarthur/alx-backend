@@ -4,7 +4,6 @@ from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
-
 class Config(object):
     """ Config class for Babel"""
     LANGUAGES = ["en", "fr"]
@@ -20,11 +19,15 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale() -> str:
-    # Check if 'locale' parameter is in the request and is a supported locale
-    if 'locale' in request.args and request.args['locale'] in app.config['LANGUAGES']:
+    """Check if 'locale' parameter is in the request and is a
+    supported locale
+    """
+    if 'locale' in request.args and \
+            request.args['locale'] in app.config['LANGUAGES']:
         return request.args['locale']
-    
-    # If not, resort to the previous default behavior
+
+    """If not, resort to the previous default behavior
+    """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
@@ -38,5 +41,6 @@ def get_index() -> str:
 
 
 if __name__ == "__main__":
-    app.debug = True  # Enable debug mode
+    app.debug = True
+    """Enable debug mode"""
     app.run(host="0.0.0.0", port="5000")
