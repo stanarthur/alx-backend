@@ -34,6 +34,7 @@ def before_request():
     login_as = request.args.get('login_as')
     g.user = get_user(int(login_as)) if login_as else None
 
+
 @babel.localeselector
 def get_locale() -> str:
     """Check if 'locale' parameter is in the request and is a
